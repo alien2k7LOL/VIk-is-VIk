@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Prep — Master Mathematics & Test Prep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <div class="splash-glow-ring"></div>
+    <div class="splash-particles" id="splash-particles"></div>
+    <div class="splash-content">
+      <img src="assets/prime-prep-logo.svg" alt="Prime Prep" class="splash-logo">
+      <h1 class="splash-title">
+        <span class="splash-letter" style="--i:0">P</span><span class="splash-letter" style="--i:1">r</span><span class="splash-letter" style="--i:2">i</span><span class="splash-letter" style="--i:3">m</span><span class="splash-letter" style="--i:4">e</span><span class="splash-spacer"></span><span class="splash-letter" style="--i:5">P</span><span class="splash-letter" style="--i:6">r</span><span class="splash-letter" style="--i:7">e</span><span class="splash-letter" style="--i:8">p</span>
+      </h1>
+      <div class="splash-tagline">students helping students</div>
+    </div>
+  </div>
+
+  <!-- Auth Screen -->
+  <div id="auth-screen">
+    <div class="auth-bg">
+      <div class="auth-bg-orb auth-orb-1"></div>
+      <div class="auth-bg-orb auth-orb-2"></div>
+      <div class="auth-bg-orb auth-orb-3"></div>
+      <div class="auth-particles" id="auth-particles"></div>
+    </div>
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="auth-logo">
+          <img src="assets/prime-prep-logo.svg" alt="Prime Prep logo" class="auth-logo-image">
+          <h1>Prime Prep</h1>
+          <p>High school math &amp; standardized test prep</p>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="App.switchAuthTab('login')">Sign In</button>
+          <button class="auth-tab" onclick="App.switchAuthTab('signup')">Sign Up</button>
+        </div>
+
+        <form class="auth-form active" id="login-form" onsubmit="App.handleLogin(event)">
+          <div id="auth-error" class="auth-error" aria-live="polite"></div>
+          <div class="auth-input-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" placeholder="you@school.edu" required autocomplete="email">
+            <i class="fas fa-envelope auth-input-icon"></i>
+          </div>
+          <div class="auth-input-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" placeholder="Enter your password" required autocomplete="current-password">
+            <i class="fas fa-lock auth-input-icon"></i>
+          </div>
+          <button type="submit" class="auth-btn" id="login-btn">
+            <i class="fas fa-arrow-right"></i> Sign In
+          </button>
+        </form>
+
+        <form class="auth-form" id="signup-form" onsubmit="App.handleSignup(event)">
+          <div id="auth-signup-error" class="auth-error" aria-live="polite"></div>
+          <div class="auth-input-group">
+            <label for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" placeholder="Your full name" required>
+            <i class="fas fa-user auth-input-icon"></i>
+          </div>
+          <div class="auth-input-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" placeholder="you@school.edu" required>
+            <i class="fas fa-envelope auth-input-icon"></i>
+          </div>
+          <div class="auth-input-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" placeholder="Create a password" required minlength="6">
+            <i class="fas fa-lock auth-input-icon"></i>
+          </div>
+          <div class="auth-input-group">
+            <label for="signup-grade">Grade Level</label>
+            <input type="text" id="signup-grade" placeholder="e.g., 10th Grade, College Freshman">
+            <i class="fas fa-graduation-cap auth-input-icon"></i>
+          </div>
+          <button type="submit" class="auth-btn" id="signup-btn">
+            <i class="fas fa-rocket"></i> Create Account
+          </button>
+        </form>
+
+        <div class="auth-divider">or</div>
+        <button type="button" class="auth-google-btn" onclick="App.handleGoogleSignIn()">
+          <svg class="auth-google-icon" viewBox="0 0 24 24" width="20" height="20"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Sign in with Google
+        </button>
+        <button class="auth-guest-btn" onclick="App.continueAsGuest()">
+          <i class="fas fa-user-astronaut"></i> Continue as Guest
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="app">
+    <!-- Skip to main content (keyboard / screen-reader users) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Animated Background (decorative, hidden from assistive tech) -->
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <!-- Background Glow Blobs -->
+    <div class="bg-blob bg-blob-1" aria-hidden="true"></div>
+    <div class="bg-blob bg-blob-2" aria-hidden="true"></div>
+    <div class="bg-blob bg-blob-3" aria-hidden="true"></div>
+
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar" aria-label="Main navigation" role="navigation">
+      <div class="sidebar-header">
+        <div class="logo">
+          <img src="assets/prime-prep-logo.svg" alt="Prime Prep logo" class="sidebar-logo-image">
+          <span class="logo-text">Prime Prep</span>
+        </div>
+        <button id="sidebar-toggle" class="icon-btn" aria-label="Toggle sidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <div class="nav-links">
+        <a href="#" class="nav-link active" data-view="home">
+          <i class="fas fa-home"></i><span>Home</span>
+        </a>
+        <a href="#" class="nav-link" data-view="schedule">
+          <i class="fas fa-calendar-alt"></i><span>Schedule</span>
+        </a>
+        <a href="#" class="nav-link" data-view="tutor">
+          <i class="fas fa-robot"></i><span>AI Tutor</span>
+        </a>
+        <a href="#" class="nav-link" data-view="notes">
+          <i class="fas fa-file-magnifying-glass"></i><span>Notes Analyzer</span>
+        </a>
+        <a href="#" class="nav-link" data-view="mistakes">
+          <i class="fas fa-rotate-left"></i><span>Review</span><span class="review-nav-badge" id="review-nav-badge" style="display:none">0</span>
+        </a>
+        <a href="#" class="nav-link" data-view="dashboard">
+          <i class="fas fa-th-large"></i><span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-link" data-view="formulas">
+          <i class="fas fa-square-root-variable"></i><span>Resources</span>
+        </a>
+      </div>
+
+      <div class="sidebar-activity" id="sidebar-activity">
+        <div class="sidebar-activity-header">
+          <i class="fas fa-clock-rotate-left"></i> Recent Study
+        </div>
+        <div class="sidebar-activity-list" id="sidebar-activity-list">
+          <div class="sidebar-activity-empty">No activity yet</div>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="xp-display">
+          <i class="fas fa-bolt"></i>
+          <span id="sidebar-xp">0 XP</span>
+        </div>
+        <div class="streak-display">
+          <i class="fas fa-fire"></i>
+          <span id="sidebar-streak">0 day streak</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="main-content" role="main" tabindex="-1">
+      <!-- Top Bar -->
+      <header id="topbar">
+        <button id="mobile-menu-btn" class="icon-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="search-container">
+          <i class="fas fa-search"></i>
+          <input type="text" id="global-search" placeholder="Search topics, formulas, concepts..." autocomplete="off" aria-label="Search topics, formulas, and concepts">
+          <div id="search-results" class="search-dropdown hidden"></div>
+        </div>
+        <div class="topbar-right">
+          <div class="topbar-quick-links">
+            <button class="topbar-quick-btn" onclick="App.navigate('home')" title="Home"><i class="fas fa-home"></i></button>
+            <button class="topbar-quick-btn" onclick="App.navigate('schedule')" title="Schedule"><i class="fas fa-calendar-alt"></i></button>
+            <button class="topbar-quick-btn" onclick="App.navigate('formulas')" title="Resources"><i class="fas fa-download"></i></button>
+            <button class="topbar-quick-btn" onclick="App.navigate('notes')" title="Notes Analyzer"><i class="fas fa-file-magnifying-glass"></i></button>
+            <button class="topbar-quick-btn theme-cycle-btn" onclick="App.cycleTheme()" title="Switch Theme" id="theme-cycle-btn"><i class="fas fa-palette"></i></button>
+            <div class="a11y-menu-wrap">
+              <button class="topbar-quick-btn" id="a11y-btn" onclick="App.toggleA11yMenu()" title="Accessibility options" aria-haspopup="true" aria-expanded="false" aria-label="Accessibility options"><i class="fas fa-universal-access"></i></button>
+              <div id="a11y-menu" class="a11y-menu hidden" role="menu" aria-label="Accessibility options">
+                <h4>Accessibility</h4>
+                <div class="a11y-row">
+                  <span>Text size</span>
+                  <div class="a11y-textsize">
+                    <button type="button" onclick="App.setTextSize(-1)" aria-label="Decrease text size">A-</button>
+                    <button type="button" onclick="App.setTextSize(0)" aria-label="Reset text size">A</button>
+                    <button type="button" onclick="App.setTextSize(1)" aria-label="Increase text size">A+</button>
+                  </div>
+                </div>
+                <label class="a11y-toggle"><input type="checkbox" id="a11y-hc" onchange="App.toggleHighContrast(this.checked)"> High contrast</label>
+                <label class="a11y-toggle"><input type="checkbox" id="a11y-dys" onchange="App.toggleDyslexiaFont(this.checked)"> Dyslexia-friendly font</label>
+              </div>
+            </div>
+          </div>
+          <div class="topbar-divider"></div>
+          <div class="topbar-brand-mark">
+            <span class="topbar-logo-icon">
+              <img src="assets/prime-prep-logo.svg" alt="Prime Prep logo">
+            </span>
+            <span class="topbar-logo-text">PRIME PREP</span>
+          </div>
+          <div class="topbar-stat">
+            <i class="fas fa-fire fire-icon"></i>
+            <span id="topbar-streak">0</span>
+          </div>
+          <div class="topbar-stat">
+            <i class="fas fa-bolt bolt-icon"></i>
+            <span id="topbar-xp">0</span>
+          </div>
+          <div class="onboarding-cta" id="onboarding-cta">
+            <button class="onboarding-btn" onclick="App.navigate('dashboard')">
+              <i class="fas fa-user-circle"></i>
+            </button>
+            <div class="onboarding-tooltip" id="onboarding-tooltip">
+              <span>Create an account to save your progress!</span>
+              <button class="onboarding-dismiss" onclick="App.dismissOnboarding(event)" aria-label="Dismiss">
+                <i class="fas fa-times"></i>
+              </button>
+              <div class="onboarding-arrow"></div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ============ HOME VIEW ============ -->
+      <section id="home-view" class="view active">
+        <div class="hero-section">
+          <div class="hero-content">
+            <div class="hero-badge">AI-Powered Learning</div>
+            <h1 class="hero-title">
+              Master <span class="gradient-text">Mathematics</span><br>
+              From Algebra to the SAT
+            </h1>
+            <p class="hero-subtitle">
+              A student learning hub created by students, for students. Courses from Algebra to AP Calculus,
+              SAT &amp; ACT prep, AI tutoring, practice quizzes, and curated videos — everything you need
+              to conquer any level of math.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-lg" onclick="document.getElementById('course-catalogue').scrollIntoView({behavior:'smooth'})">
+                <i class="fas fa-rocket"></i> Start Learning
+              </button>
+              <span class="hero-arrow-cta"><i class="fas fa-arrow-right"></i></span>
+              <button class="btn btn-glass btn-lg" onclick="App.navigate('tutor')">
+                <i class="fas fa-robot"></i> Ask AI Tutor
+              </button>
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <span class="hero-stat-number" id="stat-courses">7</span>
+                <span class="hero-stat-label">Courses</span>
+              </div>
+              <div class="hero-stat">
+                <span class="hero-stat-number" id="stat-topics">200+</span>
+                <span class="hero-stat-label">Topics</span>
+              </div>
+              <div class="hero-stat">
+                <span class="hero-stat-number" id="stat-problems">600+</span>
+                <span class="hero-stat-label">Problems</span>
+              </div>
+              <div class="hero-stat">
+                <span class="hero-stat-number" id="stat-videos">400+</span>
+                <span class="hero-stat-label">Videos</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-logo-showcase">
+              <img src="assets/prime-prep-logo.svg" alt="Prime Prep logo" class="hero-logo-image">
+              <p class="hero-logo-tagline">— students helping students</p>
+            </div>
+            <div class="floating-equations">
+              <span class="float-eq eq-1">∫</span>
+              <span class="float-eq eq-2">π</span>
+              <span class="float-eq eq-3">∑</span>
+              <span class="float-eq eq-4">∞</span>
+              <span class="float-eq eq-5">√</span>
+              <span class="float-eq eq-6">Δ</span>
+              <span class="float-eq eq-7">θ</span>
+              <span class="float-eq eq-8">∂</span>
+              <span class="float-eq eq-9">λ</span>
+              <span class="float-eq eq-10">∇</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="course-catalogue" class="section-header">
+          <h2><i class="fas fa-graduation-cap" style="color:var(--accent);margin-right:10px;"></i>High School Math</h2>
+          <p class="section-subtitle">Master every level from Algebra through Multivariable Calculus</p>
+        </div>
+        <div id="featured-courses" class="course-grid"></div>
+
+        <div class="section-header">
+          <h2><i class="fas fa-bullseye" style="color:var(--accent);margin-right:10px;"></i>Standardized Testing Math</h2>
+          <p class="section-subtitle">Strategies, Desmos tricks, and fast-solve methods for test day</p>
+        </div>
+        <div class="test-prep-tabs">
+          <button class="test-prep-tab active" onclick="App.switchTestPrepTab('sat',this)">SAT Math</button>
+          <button class="test-prep-tab" onclick="App.switchTestPrepTab('act',this)">ACT Math</button>
+        </div>
+        <div id="test-prep-content" class="test-prep-section">
+          <!-- JS will render SAT/ACT content here -->
+        </div>
+
+        <div class="section-header">
+          <h2>Why Prime Prep?</h2>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card glass-card feature-card-link" role="button" tabindex="0" onclick="App.navigate('tutor')" onkeydown="if(event.key==='Enter')App.navigate('tutor')">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+              <i class="fas fa-robot"></i>
+            </div>
+            <h3>AI-Powered Tutor</h3>
+            <p>Get instant explanations, step-by-step solutions, and personalized help from our AI tutor available 24/7.</p>
+          </div>
+          <div class="feature-card glass-card feature-card-link" role="button" tabindex="0" onclick="App.navigate('formulas')" onkeydown="if(event.key==='Enter')App.navigate('formulas')">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">
+              <i class="fas fa-video"></i>
+            </div>
+            <h3>Curated Videos</h3>
+            <p>Hand-picked video lessons from the best math educators on YouTube, organized by topic.</p>
+          </div>
+          <div class="feature-card glass-card feature-card-link" role="button" tabindex="0" onclick="document.getElementById('course-catalogue').scrollIntoView({behavior:'smooth'})" onkeydown="if(event.key==='Enter')document.getElementById('course-catalogue').scrollIntoView({behavior:'smooth'})">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+              <i class="fas fa-pen-to-square"></i>
+            </div>
+            <h3>Practice Problems</h3>
+            <p>Hundreds of practice problems with detailed solutions to test and reinforce your understanding.</p>
+          </div>
+          <div class="feature-card glass-card feature-card-link" role="button" tabindex="0" onclick="App.navigate('dashboard')" onkeydown="if(event.key==='Enter')App.navigate('dashboard')">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+              <i class="fas fa-th-large"></i>
+            </div>
+            <h3>Student Dashboard</h3>
+            <p>Track completed activities, weekly goals, XP, streaks, achievements, and per-course analytics.</p>
+          </div>
+          <div class="feature-card glass-card feature-card-link" role="button" tabindex="0" onclick="App.navigate('schedule')" onkeydown="if(event.key==='Enter')App.navigate('schedule')">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h3>Live Tutoring Schedule</h3>
+            <p>Book peer tutoring sessions, join group study meetups, and collaborate with fellow students.</p>
+          </div>
+          <div class="feature-card glass-card feature-card-link" role="button" tabindex="0" onclick="App.navigate('formulas')" onkeydown="if(event.key==='Enter')App.navigate('formulas')">
+            <div class="feature-icon" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">
+              <i class="fas fa-download"></i>
+            </div>
+            <h3>Downloadable Resources</h3>
+            <p>Formula sheets, study guides, and reference materials — download and study offline anytime.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ COURSES VIEW ============ -->
+      <section id="courses-view" class="view">
+        <div class="view-header">
+          <h1><i class="fas fa-book-open"></i> All Courses</h1>
+          <p>Choose a course to begin your journey. Courses are ordered from foundational to advanced.</p>
+        </div>
+        <div id="all-courses" class="course-grid"></div>
+      </section>
+
+      <!-- ============ COURSE DETAIL VIEW ============ -->
+      <section id="course-view" class="view">
+        <button class="btn btn-ghost back-btn" onclick="App.navigate('home')">
+          <i class="fas fa-arrow-left"></i> Back to Home
+        </button>
+        <div id="course-header" class="course-detail-header"></div>
+        <div id="course-units" class="units-container"></div>
+      </section>
+
+      <!-- ============ TOPIC/LESSON VIEW ============ -->
+      <section id="topic-view" class="view">
+        <button class="btn btn-ghost back-btn" id="topic-back-btn">
+          <i class="fas fa-arrow-left"></i> Back to Course
+        </button>
+        <div id="topic-content" class="topic-container">
+          <div class="topic-header-section" id="topic-header"></div>
+          
+          <div class="topic-tabs">
+            <button class="tab-btn active" data-tab="lesson"><i class="fas fa-book"></i> Lesson</button>
+            <button class="tab-btn" data-tab="videos"><i class="fas fa-video"></i> Videos</button>
+            <button class="tab-btn" data-tab="practice"><i class="fas fa-pen"></i> Practice</button>
+            <button class="tab-btn" data-tab="ai-explain"><i class="fas fa-robot"></i> AI Explain</button>
+          </div>
+
+          <div class="tab-content active" id="tab-lesson">
+            <div id="lesson-explanation" class="lesson-card glass-card"></div>
+            <div id="lesson-formulas" class="formulas-card glass-card"></div>
+          </div>
+
+          <div class="tab-content" id="tab-videos">
+            <div id="lesson-videos" class="videos-grid"></div>
+          </div>
+
+          <div class="tab-content" id="tab-practice">
+            <div id="practice-header" class="practice-info"></div>
+            <div id="practice-difficulty" class="practice-difficulty"></div>
+            <div id="practice-problems"></div>
+            <div id="practice-results" class="practice-results hidden" role="status" aria-live="polite"></div>
+          </div>
+
+          <div class="tab-content" id="tab-ai-explain">
+            <div class="ai-explain-container glass-card">
+              <div class="ai-explain-header">
+                <i class="fas fa-robot"></i>
+                <h3>AI Explanation</h3>
+              </div>
+              <p class="ai-explain-prompt">Get a personalized AI explanation of this topic, or try one of the suggestions below.</p>
+              <div class="ai-suggest-chips" id="ai-suggest-chips"></div>
+              <div id="ai-topic-explanation" class="ai-explanation-content"></div>
+              <button class="btn btn-primary" id="generate-explanation-btn" onclick="App.generateTopicExplanation()">
+                <i class="fas fa-wand-magic-sparkles"></i> Generate AI Explanation
+              </button>
+              <div class="ai-followup">
+                <input type="text" id="ai-followup-input" placeholder="Ask a follow-up question about this topic..." aria-label="Ask a follow-up question about this topic">
+                <button class="btn btn-primary" onclick="App.askFollowUp()" aria-label="Send follow-up question"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topic-nav-buttons">
+          <button class="btn btn-glass" id="prev-topic-btn"><i class="fas fa-arrow-left"></i> Previous</button>
+          <button class="btn btn-primary" id="complete-topic-btn" onclick="App.completeTopic()">
+            <i class="fas fa-check"></i> Mark Complete
+          </button>
+          <button class="btn btn-glass" id="next-topic-btn">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </section>
+
+      <!-- ============ AI TUTOR VIEW ============ -->
+      <section id="tutor-view" class="view tutor-view-override">
+        <div class="tutor-workspace">
+          <!-- Session Sidebar -->
+          <aside class="tutor-sidebar">
+            <div class="tutor-sidebar-header">
+              <div class="tutor-avatar">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div>
+                <h3>AI Math Tutor</h3>
+                <p>Powered by GPT</p>
+              </div>
+            </div>
+            <div class="tutor-sidebar-section">
+              <h4><i class="fas fa-clock-rotate-left"></i> Quick Formulas</h4>
+              <div class="tutor-formula-list">
+                <div class="tutor-formula-chip">Quadratic: x = (-b ± √(b²-4ac)) / 2a</div>
+                <div class="tutor-formula-chip">Derivative: d/dx [xⁿ] = nxⁿ⁻¹</div>
+                <div class="tutor-formula-chip">∫ xⁿ dx = xⁿ⁺¹/(n+1) + C</div>
+                <div class="tutor-formula-chip">sin²θ + cos²θ = 1</div>
+                <div class="tutor-formula-chip">Area = πr²</div>
+                <div class="tutor-formula-chip">a² + b² = c²</div>
+              </div>
+            </div>
+            <div class="tutor-sidebar-section">
+              <h4><i class="fas fa-lightbulb"></i> Suggestions</h4>
+              <div class="tutor-suggestion-list">
+                <button class="tutor-suggest-btn" onclick="App.sendSuggestion(this)">Explain derivatives</button>
+                <button class="tutor-suggest-btn" onclick="App.sendSuggestion(this)">What is integration?</button>
+                <button class="tutor-suggest-btn" onclick="App.sendSuggestion(this)">Solve x² - 5x + 6 = 0</button>
+                <button class="tutor-suggest-btn" onclick="App.sendSuggestion(this)">Pythagorean theorem</button>
+              </div>
+            </div>
+            <div class="tutor-sidebar-footer">
+              <button class="btn btn-ghost btn-sm" onclick="App.clearChat()">
+                <i class="fas fa-trash"></i> Clear Chat
+              </button>
+            </div>
+          </aside>
+
+          <!-- Main Chat Column -->
+          <div class="tutor-main">
+            <div id="chat-messages" class="chat-messages">
+              <!-- Empty state -->
+              <div id="chat-empty-state" class="chat-empty-state">
+                <div class="empty-state-icon">
+                  <i class="fas fa-brain"></i>
+                </div>
+                <h2>What can I help you learn?</h2>
+                <p>I can explain concepts, solve equations, help with homework, and more.</p>
+                <div class="quick-start-grid">
+                  <button class="quick-start-card" onclick="App.sendSuggestion(this)">
+                    <i class="fas fa-function"></i>
+                    <span>Explain Calculus</span>
+                  </button>
+                  <button class="quick-start-card" onclick="App.sendSuggestion(this)">
+                    <i class="fas fa-square-root-alt"></i>
+                    <span>Solve an Equation</span>
+                  </button>
+                  <button class="quick-start-card" onclick="App.sendSuggestion(this)">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Practice SAT Math</span>
+                  </button>
+                  <button class="quick-start-card" onclick="App.sendSuggestion(this)">
+                    <i class="fas fa-shapes"></i>
+                    <span>Geometry Help</span>
+                  </button>
+                </div>
+                <div class="empty-state-arrow">
+                  <span>Ask me anything about math!</span>
+                  <i class="fas fa-arrow-down"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Guide Arrow -->
+            <div class="floating-guide" id="tutor-floating-guide">
+              <span class="floating-guide-text">Start your first lesson here!</span>
+              <i class="fas fa-arrow-down floating-guide-arrow"></i>
+            </div>
+
+            <!-- Command Center Input -->
+            <div class="chat-command-center">
+              <div id="formula-palette" class="formula-palette hidden" role="menu" aria-label="Insert math symbol"></div>
+              <input type="file" id="chat-image-input" accept="image/*" hidden onchange="App.handleChatImage(event)">
+              <div class="chat-input-row">
+                <button class="cmd-icon-btn" title="Upload a photo of a problem" aria-label="Upload a photo of a math problem for the AI to solve" onclick="document.getElementById('chat-image-input').click()">
+                  <i class="fas fa-image"></i>
+                </button>
+                <button class="cmd-icon-btn" id="formula-picker-btn" title="Insert a math symbol" aria-label="Insert a math symbol" aria-haspopup="true" aria-expanded="false" onclick="App.toggleFormulaPalette()">
+                  <i class="fas fa-square-root-alt"></i>
+                </button>
+                <textarea id="chat-input" placeholder="Ask me any math question..." rows="1" aria-label="Ask the AI tutor a math question"></textarea>
+                <button class="chat-send-btn" id="chat-send" onclick="App.sendMessage()" aria-label="Send message">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ NOTES ANALYZER VIEW ============ -->
+      <section id="notes-view" class="view">
+        <div class="view-header">
+          <h1><i class="fas fa-file-magnifying-glass"></i> Notes Analyzer</h1>
+          <p>Learn it your teacher's way.</p>
+        </div>
+
+        <div class="notes-why glass-card">
+          <div class="notes-why-icon"><i class="fas fa-lightbulb"></i></div>
+          <div class="notes-why-text">
+            <h2>Why use this?</h2>
+            <p>Every teacher has a <strong>specific method</strong> they want you to follow — a certain way to set up the problem, show your work, and write the answer. Lose points for "not showing it their way"? Upload your teacher's <strong>slides, notes, or a worked example</strong> (PDF or photo) and Prime Prep will break down the <strong>exact methodology used</strong> and show you how to apply it, so your work matches what your teacher expects.</p>
+          </div>
+        </div>
+
+        <div class="notes-uploader glass-card">
+          <div id="notes-dropzone" class="notes-dropzone" role="button" tabindex="0" aria-label="Upload a PDF or image of your notes" onclick="document.getElementById('notes-file-input').click()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();document.getElementById('notes-file-input').click();}">
+            <input type="file" id="notes-file-input" accept="application/pdf,image/*" hidden onchange="App.onNotesFileSelected(event)">
+            <i class="fas fa-cloud-arrow-up"></i>
+            <p class="notes-drop-title">Drop a PDF or image here, or click to browse</p>
+            <p class="notes-drop-sub">Class slides, lecture notes, or a worked example &bull; PDF, PNG, or JPG &bull; up to 15 MB</p>
+          </div>
+
+          <div id="notes-file-chip" class="notes-file-chip hidden">
+            <i class="fas fa-file-lines"></i>
+            <span id="notes-file-name">file</span>
+            <button type="button" class="notes-file-remove" aria-label="Remove file" onclick="App.clearNotesFile()"><i class="fas fa-times"></i></button>
+          </div>
+
+          <div class="notes-context-group">
+            <label for="notes-context">What is this about? <span class="notes-optional">(optional, improves results)</span></label>
+            <input type="text" id="notes-context" placeholder="e.g., Solving systems by elimination — Mr. Lee's Algebra 2 slides">
+          </div>
+
+          <button type="button" class="btn btn-primary btn-lg notes-analyze-btn" id="notes-analyze-btn" onclick="App.analyzeNotes()" disabled>
+            <i class="fas fa-wand-magic-sparkles"></i> Analyze the methodology
+          </button>
+        </div>
+
+        <div id="notes-status" class="notes-status hidden" role="status" aria-live="polite"></div>
+        <div id="notes-result" class="notes-result glass-card hidden"></div>
+      </section>
+
+      <!-- ============ MISTAKES NOTEBOOK VIEW ============ -->
+      <section id="mistakes-view" class="view">
+        <div class="view-header">
+          <h1><i class="fas fa-rotate-left"></i> Review &amp; Mistakes Notebook</h1>
+          <p>Every question you miss is saved here. Re-attempt them with spaced repetition until they stick.</p>
+        </div>
+        <div id="mistakes-content"></div>
+      </section>
+
+      <!-- ============ SCHEDULE VIEW (REQUIRED) ============ -->
+      <section id="schedule-view" class="view">
+        <div class="view-header">
+          <h1><i class="fas fa-calendar-alt"></i> Live Tutoring & Group Study</h1>
+          <p>Book one-on-one peer tutoring or create and join group study sessions. All sessions are run by students, for students.</p>
+        </div>
+
+        <div class="schedule-quick-actions">
+          <button type="button" class="schedule-action-card schedule-action-create" onclick="App.openSessionModal()">
+            <span class="schedule-action-icon"><i class="fas fa-plus-circle"></i></span>
+            <span class="schedule-action-title">Create a session</span>
+            <span class="schedule-action-desc">Host a group study or tutoring slot</span>
+          </button>
+          <a href="#schedule-week-anchor" class="schedule-action-card schedule-action-week">
+            <span class="schedule-action-icon"><i class="fas fa-calendar-week"></i></span>
+            <span class="schedule-action-title">This week</span>
+            <span class="schedule-action-desc">View the full week at a glance</span>
+          </a>
+        </div>
+
+        <div class="schedule-section" id="schedule-week-anchor">
+          <h2 class="schedule-section-title"><i class="fas fa-calendar-day"></i> Week at a glance</h2>
+          <div class="schedule-controls">
+            <div class="schedule-week-nav">
+              <button type="button" class="btn btn-glass" onclick="App.prevWeek()" aria-label="Previous week"><i class="fas fa-chevron-left"></i></button>
+              <span id="schedule-week-label" class="schedule-week-label">This Week</span>
+              <button type="button" class="btn btn-glass" onclick="App.nextWeek()" aria-label="Next week"><i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
+          <div id="schedule-grid" class="schedule-grid"></div>
+        </div>
+
+        <div class="schedule-section">
+          <h2 class="schedule-section-title"><i class="fas fa-users"></i> Upcoming group study & tutoring</h2>
+          <p class="schedule-section-desc">Join an upcoming session or create your own.</p>
+          <div id="study-sessions" class="study-sessions-list"></div>
+        </div>
+
+        <div class="schedule-section">
+          <h2 class="schedule-section-title"><i class="fas fa-chalkboard-user"></i> Book a peer tutor</h2>
+          <p class="schedule-section-desc">Connect one-on-one with a student tutor for help in a specific subject.</p>
+          <div class="peer-tutor-grid" id="peer-tutor-grid"></div>
+        </div>
+
+        <div class="schedule-section">
+          <h2 class="schedule-section-title"><i class="fas fa-clock"></i> Your tutor session requests</h2>
+          <p class="schedule-section-desc">Sessions show as Pending approval until your tutor confirms.</p>
+          <div id="tutor-bookings-list" class="tutor-bookings-list"></div>
+        </div>
+
+        <!-- Book Tutor Modal -->
+        <div id="tutor-booking-modal" class="modal hidden">
+          <div class="modal-overlay" onclick="App.closeTutorBookingModal()"></div>
+          <div class="modal-content glass-card session-modal-content">
+            <h3><i class="fas fa-calendar-check"></i> Request a tutor session</h3>
+            <p class="modal-subtitle">Choose subject, tutor, date, and time. The tutor will approve or decline your request.</p>
+            <div class="form-group">
+              <label for="booking-tutor">Preferred tutor <span class="required">*</span></label>
+              <select id="booking-tutor">
+                <option value="">Select a tutor...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="booking-subject">Subject <span class="required">*</span></label>
+              <select id="booking-subject">
+                <option value="">Select a subject...</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="booking-date">Date <span class="required">*</span></label>
+                <input type="date" id="booking-date" min="">
+              </div>
+              <div class="form-group">
+                <label for="booking-time">Time <span class="required">*</span></label>
+                <input type="time" id="booking-time">
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn btn-ghost" onclick="App.closeTutorBookingModal()">Cancel</button>
+              <button type="button" class="btn btn-primary" onclick="App.submitTutorBooking()"><i class="fas fa-paper-plane"></i> Request session</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Create Session Modal -->
+        <div id="session-modal" class="modal hidden">
+          <div class="modal-overlay" onclick="App.closeSessionModal()"></div>
+          <div class="modal-content glass-card session-modal-content">
+            <h3><i class="fas fa-plus-circle"></i> Create study session</h3>
+            <p class="modal-subtitle">Add a group study, live tutoring, or exam review session so others can join.</p>
+            <div class="form-group">
+              <label for="session-title">Session title <span class="required">*</span></label>
+              <input type="text" id="session-title" placeholder="e.g., Calculus review group">
+            </div>
+            <div class="form-group">
+              <label for="session-subject">Subject / course <span class="required">*</span></label>
+              <select id="session-subject">
+                <option value="">Select a course...</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="session-date">Date <span class="required">*</span></label>
+                <input type="date" id="session-date" min="">
+              </div>
+              <div class="form-group">
+                <label for="session-time">Time <span class="required">*</span></label>
+                <input type="time" id="session-time">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="session-type">Type</label>
+              <select id="session-type">
+                <option value="group">Group study</option>
+                <option value="tutoring">Live tutoring</option>
+                <option value="review">Exam review</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="session-desc">Description (optional)</label>
+              <textarea id="session-desc" rows="3" placeholder="What will you cover? Who is it for?"></textarea>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn btn-ghost" onclick="App.closeSessionModal()">Cancel</button>
+              <button type="button" class="btn btn-primary" onclick="App.createSession()"><i class="fas fa-check"></i> Create session</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ STUDENT DASHBOARD (REQUIRED) ============ -->
+      <section id="dashboard-view" class="view">
+        <div class="view-header">
+          <h1><i class="fas fa-th-large"></i> Student Dashboard</h1>
+          <p>Track your learning progress, completed activities, and study goals.</p>
+        </div>
+
+        <div class="progress-overview">
+          <div class="stat-card glass-card">
+            <div class="stat-icon"><i class="fas fa-bolt bolt-icon"></i></div>
+            <div class="stat-value" id="prog-xp">0</div>
+            <div class="stat-label">Total XP</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon"><i class="fas fa-fire fire-icon"></i></div>
+            <div class="stat-value" id="prog-streak">0</div>
+            <div class="stat-label">Day Streak</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon"><i class="fas fa-check-circle" style="color:#10b981"></i></div>
+            <div class="stat-value" id="prog-completed">0</div>
+            <div class="stat-label">Topics Completed</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon"><i class="fas fa-star" style="color:#f59e0b"></i></div>
+            <div class="stat-value" id="prog-accuracy">0%</div>
+            <div class="stat-label">Avg Accuracy</div>
+          </div>
+          <div class="stat-card glass-card">
+            <div class="stat-icon"><i class="fas fa-clock" style="color:#06b6d4"></i></div>
+            <div class="stat-value" id="prog-time">0h</div>
+            <div class="stat-label">Study Time</div>
+          </div>
+        </div>
+
+        <div class="success-metrics glass-card" id="success-metrics">
+          <div class="sm-header">
+            <i class="fas fa-trophy"></i>
+            <h2>Success Metrics</h2>
+          </div>
+          <div class="sm-grid">
+            <div class="sm-item">
+              <div class="sm-ring sm-ring-topics">
+                <svg viewBox="0 0 36 36">
+                  <path class="sm-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="sm-ring-fill" id="sm-ring-topics" stroke="#10b981" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="0, 100" />
+                </svg>
+                <span class="sm-ring-val" id="sm-val-topics">0</span>
+              </div>
+              <span class="sm-label">Topics Mastered</span>
+              <span class="sm-sublabel" id="sm-sub-topics">of all available topics</span>
+            </div>
+            <div class="sm-item">
+              <div class="sm-ring sm-ring-accuracy">
+                <svg viewBox="0 0 36 36">
+                  <path class="sm-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="sm-ring-fill" id="sm-ring-accuracy" stroke="#f59e0b" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="0, 100" />
+                </svg>
+                <span class="sm-ring-val" id="sm-val-accuracy">0%</span>
+              </div>
+              <span class="sm-label">Avg Quiz Score</span>
+              <span class="sm-sublabel">across all attempts</span>
+            </div>
+            <div class="sm-item">
+              <div class="sm-ring sm-ring-quizzes">
+                <svg viewBox="0 0 36 36">
+                  <path class="sm-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="sm-ring-fill" id="sm-ring-quizzes" stroke="#8b5cf6" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="0, 100" />
+                </svg>
+                <span class="sm-ring-val" id="sm-val-quizzes">0</span>
+              </div>
+              <span class="sm-label">Quizzes Taken</span>
+              <span class="sm-sublabel">practice + generated</span>
+            </div>
+            <div class="sm-item">
+              <div class="sm-ring sm-ring-streak">
+                <svg viewBox="0 0 36 36">
+                  <path class="sm-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="sm-ring-fill" id="sm-ring-streak" stroke="#ef4444" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="0, 100" />
+                </svg>
+                <span class="sm-ring-val" id="sm-val-streak">0</span>
+              </div>
+              <span class="sm-label">Best Streak</span>
+              <span class="sm-sublabel">consecutive days</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h2>Weekly Goals</h2>
+        </div>
+        <div class="goals-container glass-card" id="goals-container">
+          <div class="goal-item">
+            <div class="goal-info">
+              <span class="goal-label">Complete 5 topics this week</span>
+              <span class="goal-count" id="goal-topics-count">0 / 5</span>
+            </div>
+            <div class="progress-bar-container"><div class="progress-bar-fill" id="goal-topics-bar" style="width:0%;background:#7c3aed"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-info">
+              <span class="goal-label">Score 80%+ on 3 quizzes</span>
+              <span class="goal-count" id="goal-quiz-count">0 / 3</span>
+            </div>
+            <div class="progress-bar-container"><div class="progress-bar-fill" id="goal-quiz-bar" style="width:0%;background:#10b981"></div></div>
+          </div>
+          <div class="goal-item">
+            <div class="goal-info">
+              <span class="goal-label">Maintain a 7-day streak</span>
+              <span class="goal-count" id="goal-streak-count">0 / 7</span>
+            </div>
+            <div class="progress-bar-container"><div class="progress-bar-fill" id="goal-streak-bar" style="width:0%;background:#f59e0b"></div></div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <h2>Course Progress</h2>
+        </div>
+        <div id="course-progress-list" class="course-progress-list"></div>
+
+        <div class="section-header">
+          <h2>Achievements</h2>
+        </div>
+        <div id="achievements-grid" class="achievements-grid"></div>
+
+        <div class="section-header">
+          <h2>Completed Activities</h2>
+          <p class="section-subtitle">Detailed history of every practice quiz you've finished</p>
+        </div>
+        <div id="completed-activities" class="completed-activities-list"></div>
+
+        <div class="section-header">
+          <h2>Recent Activity</h2>
+        </div>
+        <div id="recent-activity" class="activity-list glass-card"></div>
+      </section>
+
+      <!-- ============ RESOURCES VIEW (REQUIRED — lessons, videos, quizzes, downloads) ============ -->
+      <section id="formulas-view" class="view">
+        <div class="view-header">
+          <h1><i class="fas fa-square-root-variable"></i> Resources</h1>
+          <p>Formula sheets, downloadable study guides, video links, and interactive tools — all in one place.</p>
+        </div>
+
+        <div class="resource-tabs">
+          <button class="resource-tab active" data-rtab="formulas" onclick="App.switchResourceTab('formulas')"><i class="fas fa-square-root-variable"></i> Formula Sheets</button>
+          <button class="resource-tab" data-rtab="downloads" onclick="App.switchResourceTab('downloads')"><i class="fas fa-download"></i> Downloadable Materials</button>
+          <button class="resource-tab" data-rtab="practice-tests" onclick="App.switchResourceTab('practice-tests')"><i class="fas fa-file-pen"></i> SAT &amp; ACT Practice Tests</button>
+          <button class="resource-tab" data-rtab="video-library" onclick="App.switchResourceTab('video-library')"><i class="fas fa-video"></i> Video Library</button>
+          <button class="resource-tab" data-rtab="flashcards" onclick="App.switchResourceTab('flashcards')"><i class="fas fa-clone"></i> Flashcards</button>
+        </div>
+
+        <div class="resource-content active" id="rtab-formulas">
+          <div class="formula-search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="formula-search" placeholder="Search formulas (e.g., quadratic, derivative, area)..." aria-label="Search formulas">
+          </div>
+          <div id="formula-sheets" class="formula-sheets"></div>
+        </div>
+
+        <div class="resource-content" id="rtab-downloads">
+          <div class="downloads-grid" id="downloads-grid"></div>
+        </div>
+
+        <div class="resource-content" id="rtab-practice-tests">
+          <div class="practice-tests-intro">
+            <div class="pt-intro-icon"><i class="fas fa-bullseye"></i></div>
+            <h2>Full-Length Practice Tests</h2>
+            <p>The single best way to prepare for the SAT or ACT is to practice under real conditions. Each test below mirrors the actual exam in format, difficulty, and timing. Print one out, set a timer, and simulate test day — no shortcuts.</p>
+          </div>
+          <div class="practice-tests-grid">
+
+            <div class="practice-test-card glass-card">
+              <div class="pt-card-badge sat-badge">SAT</div>
+              <div class="pt-card-body">
+                <h3>SAT Practice Test 1</h3>
+                <p>A complete, realistic SAT practice exam covering Reading, Writing & Language, and Math (Calculator & No-Calculator). Mirrors the official College Board format — ideal for timed full-length practice sessions.</p>
+                <div class="pt-math-callout"><i class="fas fa-calculator"></i> Math section begins on <strong>page 34</strong></div>
+                <ul class="pt-card-features">
+                  <li><i class="fas fa-clock"></i> Full-length — allow 3 hrs</li>
+                  <li><i class="fas fa-chart-line"></i> College Board–style format</li>
+                  <li><i class="fas fa-print"></i> Print-ready PDF</li>
+                </ul>
+              </div>
+              <a href="assets/SAT_Practice_Test_1.pdf" download class="btn btn-primary pt-download-btn"><i class="fas fa-download"></i> Download Test</a>
+            </div>
+
+            <div class="practice-test-card glass-card">
+              <div class="pt-card-badge sat-badge">SAT</div>
+              <div class="pt-card-body">
+                <h3>SAT Practice Test 2</h3>
+                <p>Another full-length SAT practice exam with fresh passages and problem sets. Use this after Test 1 to track your progress and identify remaining weak spots before the real test day.</p>
+                <div class="pt-math-callout"><i class="fas fa-calculator"></i> Math section begins on <strong>page 34</strong></div>
+                <ul class="pt-card-features">
+                  <li><i class="fas fa-clock"></i> Full-length — allow 3 hrs</li>
+                  <li><i class="fas fa-chart-line"></i> College Board–style format</li>
+                  <li><i class="fas fa-print"></i> Print-ready PDF</li>
+                </ul>
+              </div>
+              <a href="assets/SAT_Practice_Test_2.pdf" download class="btn btn-primary pt-download-btn"><i class="fas fa-download"></i> Download Test</a>
+            </div>
+
+            <div class="practice-test-card glass-card">
+              <div class="pt-card-badge act-badge">ACT</div>
+              <div class="pt-card-body">
+                <h3>ACT Practice Test 1</h3>
+                <p>A realistic ACT practice exam with English, Math, Reading, and Science sections. Formatted to closely replicate actual test conditions — great for building stamina and pacing strategy.</p>
+                <div class="pt-math-callout"><i class="fas fa-calculator"></i> Math section begins on <strong>page 26</strong></div>
+                <ul class="pt-card-features">
+                  <li><i class="fas fa-clock"></i> Full-length — allow 2 hrs 55 min</li>
+                  <li><i class="fas fa-chart-line"></i> Official ACT–style format</li>
+                  <li><i class="fas fa-print"></i> Print-ready PDF</li>
+                </ul>
+              </div>
+              <a href="assets/ACT_Practice_Test_1.pdf" download class="btn btn-primary pt-download-btn"><i class="fas fa-download"></i> Download Test</a>
+            </div>
+
+            <div class="practice-test-card glass-card">
+              <div class="pt-card-badge act-badge">ACT</div>
+              <div class="pt-card-body">
+                <h3>ACT Practice Test 2</h3>
+                <p>A second full-length ACT practice exam with completely different question sets. Perfect for a second round of timed practice to sharpen your weak areas and build confidence.</p>
+                <div class="pt-math-callout"><i class="fas fa-calculator"></i> Math section begins on <strong>page 16</strong></div>
+                <ul class="pt-card-features">
+                  <li><i class="fas fa-clock"></i> Full-length — allow 2 hrs 55 min</li>
+                  <li><i class="fas fa-chart-line"></i> Official ACT–style format</li>
+                  <li><i class="fas fa-print"></i> Print-ready PDF</li>
+                </ul>
+              </div>
+              <a href="assets/ACT_Practice_Test_2.pdf" download class="btn btn-primary pt-download-btn"><i class="fas fa-download"></i> Download Test</a>
+            </div>
+
+            <div class="practice-test-card glass-card pt-ai-callout-card" onclick="App.navigate('tutor')">
+              <div class="pt-ai-callout-inner">
+                <div class="pt-ai-icon"><i class="fas fa-robot"></i></div>
+                <h3>Need Help?</h3>
+                <p>If any doubts, refer to <a href="#" onclick="App.navigate('tutor');return false;">AI Tutor</a></p>
+                <span class="pt-ai-arrow"><i class="fas fa-arrow-right"></i></span>
+              </div>
+            </div>
+
+          </div>
+          <div class="pt-licensing">
+            <i class="fas fa-info-circle"></i>
+            <div>
+              <strong>Sources &amp; Licensing</strong>
+              <p>SAT practice tests are sourced from the <a href="https://satsuite.collegeboard.org/sat/practice-preparation/practice-tests" target="_blank" rel="noopener">College Board</a>, the official developer of the SAT. These materials are provided free of charge for educational, non-commercial use. SAT&reg; is a registered trademark of the College Board, which is not affiliated with Prime Prep.</p>
+              <p>ACT practice tests are sourced from <a href="https://www.act.org/content/act/en/products-and-services/the-act/test-preparation.html" target="_blank" rel="noopener">ACT, Inc.</a>, the official developer of the ACT. These materials are made publicly available for student preparation and are used here for educational, non-commercial purposes only. ACT&reg; is a registered trademark of ACT, Inc., which is not affiliated with Prime Prep.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="resource-content" id="rtab-video-library">
+          <div class="video-library-grid" id="video-library-grid"></div>
+        </div>
+
+        <div class="resource-content" id="rtab-flashcards">
+          <div class="flashcards-intro">
+            <h2><i class="fas fa-clone"></i> Flashcards</h2>
+            <p>Drill key vocabulary and must-know formulas. Pick a subject, then flip through the deck. Tip: press <kbd>Space</kbd> to flip and the arrow keys to move.</p>
+          </div>
+          <div id="flashcards-home" class="flashcards-home"></div>
+          <div id="flashcards-player" class="flashcards-player hidden"></div>
+        </div>
+      </section>
+
+      <!-- ============ SETTINGS VIEW ============ -->
+
+      <!-- ============ FOOTER WITH SOURCES ============ -->
+      <footer class="site-footer">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <img src="assets/prime-prep-logo.svg" alt="Prime Prep logo" class="footer-logo-image">
+            <span class="footer-brand-text"><strong>Prime Prep</strong> — Created by students, for students.</span>
+          </div>
+          <div class="footer-section">
+            <h4>Sources &amp; References</h4>
+            <ul>
+              <li>Khan Academy — <a href="https://www.khanacademy.org" target="_blank" rel="noopener">khanacademy.org</a></li>
+              <li>The Organic Chemistry Tutor — <a href="https://www.youtube.com/@TheOrganicChemistryTutor" target="_blank" rel="noopener">YouTube</a></li>
+              <li>3Blue1Brown — <a href="https://www.3blue1brown.com" target="_blank" rel="noopener">3blue1brown.com</a></li>
+              <li>OpenStax Textbooks — <a href="https://openstax.org" target="_blank" rel="noopener">openstax.org</a> (CC BY 4.0)</li>
+              <li>Paul's Online Math Notes — <a href="https://tutorial.math.lamar.edu" target="_blank" rel="noopener">tutorial.math.lamar.edu</a></li>
+              <li>College Board AP Curriculum — <a href="https://apcentral.collegeboard.org" target="_blank" rel="noopener">apcentral.collegeboard.org</a></li>
+              <li>SAT&reg; Practice Tests — <a href="https://satsuite.collegeboard.org" target="_blank" rel="noopener">College Board</a> (free educational use)</li>
+              <li>ACT&reg; Practice Tests — <a href="https://www.act.org" target="_blank" rel="noopener">ACT, Inc.</a> (free educational use)</li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Technology</h4>
+            <ul>
+              <li>KaTeX — LaTeX math rendering (<a href="https://katex.org" target="_blank" rel="noopener">katex.org</a>, MIT License)</li>
+              <li>Font Awesome — Icons (<a href="https://fontawesome.com" target="_blank" rel="noopener">fontawesome.com</a>)</li>
+              <li>Google Fonts — Inter, Space Grotesk, JetBrains Mono</li>
+              <li>OpenAI GPT API — AI Tutor functionality</li>
+            </ul>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2026 Prime Prep Student Learning Hub. Built for FBLA Website Design 2025–2026.</p>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Mobile Bottom Nav -->
+    <nav id="mobile-nav" aria-label="Mobile navigation">
+      <a href="#" class="mobile-nav-link active" data-view="home">
+        <i class="fas fa-home"></i><span>Home</span>
+      </a>
+      <a href="#" class="mobile-nav-link" data-view="schedule">
+        <i class="fas fa-calendar-alt"></i><span>Schedule</span>
+      </a>
+      <a href="#" class="mobile-nav-link" data-view="dashboard">
+        <i class="fas fa-th-large"></i><span>Dashboard</span>
+      </a>
+      <a href="#" class="mobile-nav-link" data-view="tutor">
+        <i class="fas fa-robot"></i><span>AI Tutor</span>
+      </a>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div id="toast-container" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- AI Tutor Side Panel -->
+    <div id="ai-side-panel" class="ai-side-panel" role="dialog" aria-modal="true" aria-label="AI Tutor explanation">
+      <div class="ai-panel-header">
+        <div class="ai-panel-title"><i class="fas fa-robot"></i> AI Tutor</div>
+        <button class="ai-panel-close" onclick="App.closeAIPanel()" aria-label="Close AI tutor panel"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="ai-panel-messages" id="ai-panel-messages"></div>
+      <div class="ai-panel-input-area">
+        <input type="text" id="ai-panel-input" placeholder="Ask a follow-up..." aria-label="Ask the AI tutor a follow-up question" onkeydown="if(event.key==='Enter')App.sendPanelMessage()">
+        <button class="ai-panel-send" onclick="App.sendPanelMessage()"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+    <div id="ai-panel-overlay" class="ai-panel-overlay" onclick="App.closeAIPanel()"></div>
+
+    <!-- Graphing Calculator (Desmos) -->
+    <button id="calc-fab" class="calc-fab" onclick="App.toggleCalculator()" title="Graphing calculator" aria-label="Open graphing calculator">
+      <i class="fas fa-calculator"></i>
+    </button>
+    <div id="calc-panel" class="calc-panel hidden" role="dialog" aria-modal="false" aria-label="Graphing calculator">
+      <div class="calc-panel-header">
+        <span><i class="fas fa-calculator"></i> Graphing Calculator</span>
+        <button class="calc-panel-close" onclick="App.toggleCalculator()" aria-label="Close calculator"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="calc-mount" class="calc-mount"></div>
+    </div>
+
+    <!-- Quiz / Mock-test / Review Session Overlay -->
+    <div id="session-overlay" class="session-overlay hidden" role="dialog" aria-modal="true" aria-label="Practice session">
+      <div class="session-shell">
+        <div class="session-topbar">
+          <button class="session-exit" id="session-exit" onclick="App.exitSession()" aria-label="Exit session"><i class="fas fa-times"></i> Exit</button>
+          <div class="session-title" id="session-title"></div>
+          <div class="session-timer" id="session-timer"></div>
+        </div>
+        <div class="session-progress-track"><div class="session-progress-bar" id="session-progress-bar"></div></div>
+        <div class="session-body" id="session-body"></div>
+        <div class="session-footer" id="session-footer"></div>
+      </div>
+    </div>
+
+    <!-- Guided Tour -->
+    <div id="tour-overlay" class="tour-overlay hidden" aria-hidden="true">
+      <div id="tour-highlight" class="tour-highlight"></div>
+      <div id="tour-tooltip" class="tour-tooltip" role="dialog" aria-modal="true" aria-label="Guided tour">
+        <div class="tour-step-count" id="tour-step-count"></div>
+        <h3 id="tour-title"></h3>
+        <p id="tour-text"></p>
+        <div class="tour-actions">
+          <button class="tour-skip" onclick="App.endTour()">Skip tour</button>
+          <div class="tour-nav-btns">
+            <button class="btn btn-glass btn-sm" id="tour-back" onclick="App.tourPrev()">Back</button>
+            <button class="btn btn-primary btn-sm" id="tour-next" onclick="App.tourNext()">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Keyboard Shortcuts -->
+    <div id="shortcuts-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+      <div class="modal-overlay" onclick="App.closeShortcuts()"></div>
+      <div class="modal-content shortcuts-content">
+        <button class="modal-close" onclick="App.closeShortcuts()" aria-label="Close keyboard shortcuts"><i class="fas fa-times"></i></button>
+        <h2><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h2>
+        <ul class="shortcuts-list">
+          <li><kbd>/</kbd><span>Focus the search bar</span></li>
+          <li><kbd>?</kbd><span>Show this help</span></li>
+          <li><kbd>g</kbd><span>Toggle the graphing calculator</span></li>
+          <li><kbd>Esc</kbd><span>Close any dialog or panel</span></li>
+          <li><kbd>&larr;</kbd> <kbd>&rarr;</kbd><span>Previous / next flashcard</span></li>
+          <li><kbd>Space</kbd><span>Flip the current flashcard</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden">
+      <div class="loader">
+        <div class="loader-ring"></div>
+        <span>Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <!-- Firebase: replace the config below with your project config from Firebase Console -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+  <script>
+    window.PRIMEPREP_FIREBASE_CONFIG = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://www.desmos.com/api/v1.11/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+  <script>
+    if (window.pdfjsLib) {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
+  <!-- Local-only AI key (gitignored; absent/404 on the live site, which uses the secure function instead) -->
+  <script src="js/local-config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
